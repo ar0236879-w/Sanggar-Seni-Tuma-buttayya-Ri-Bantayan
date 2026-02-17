@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Website Resmi Sanggar Seni Tuma'buttayya Ri Bantayan (SSTB) - SMK Negeri 3 Bantaeng. Menerima jasa Pakkio Bunting, Tari Paduppa, dan Mangaru.">
+    <meta name="keywords" content="SSTB, Sanggar Seni, SMKN 3 Bantaeng, Seni Sulawesi, Bantayan Art, Pakkio Bunting, Tari Paduppa, Mangaru">
+    <title>Sanggar Seni Tuma'buttayya Ri Bantayan (SSTB)</title>
+    
+    <!-- Google Fonts: Playfair Display & Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- VARIABLES & RESET --- */
+        :root {
+            --color-black: #050505;
+            --color-dark: #121212;
+            --color-red: #8B0000;
+            --color-red-bright: #c0392b;
+            --color-gold: #D4AF37;
+            --color-gold-light: #f1c40f;
+            --color-white: #ffffff;
+            --color-gray: #cccccc;
+            
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Poppins', sans-serif;
+            
+            --transition-speed: 0.4s;
+            --box-shadow-gold: 0 10px 30px rgba(212, 175, 55, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-black);
+            color: var(--color-white);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- BACKGROUND PATTERN (SULAWESI MOTIF) --- */
+        .bg-pattern {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; opacity: 0.05;
+            background-image: 
+                linear-gradient(30deg, var(--color-gold) 12%, transparent 12.5%, transparent 87%, var(--color-gold) 87.5%, var(--color-gold)),
+                linear-gradient(150deg, var(--color-gold) 12%, transparent 12.5%, transparent 87%, var(--color-gold) 87.5%, var(--color-gold)),
+                linear-gradient(30deg, var(--color-gold) 12%, transparent 12.5%, transparent 87%, var(--color-gold) 87.5%, var(--color-gold)),
+                linear-gradient(150deg, var(--color-gold) 12%, transparent 12.5%, transparent 87%, var(--color-gold) 87.5%, var(--color-gold)),
+                linear-gradient(60deg, var(--color-gold) 25%, transparent 25.5%, transparent 75%, var(--color-gold) 75%, var(--color-gold)),
+                linear-gradient(60deg, var(--color-gold) 25%, transparent 25.5%, transparent 75%, var(--color-gold) 75%, var(--color-gold));
+            background-size: 80px 140px;
+            background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+            pointer-events: none;
+        }
+
+        /* --- UTILITIES --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .text-gold { color: var(--color-gold); }
+        .text-red { color: var(--color-red); }
+        
+        .section-title {
+            font-family: var(--font-heading); font-size: 2.5rem;
+            text-align: center; margin-bottom: 3rem; position: relative;
+            display: inline-block; left: 50%; transform: translateX(-50%);
+        }
+        .section-title::after {
+            content: ''; display: block; width: 60px; height: 3px;
+            background: linear-gradient(90deg, transparent, var(--color-gold), transparent); margin: 10px auto 0;
+        }
+
+        .btn {
+            display: inline-block; padding: 12px 30px;
+            background: transparent; border: 2px solid var(--color-gold);
+            color: var(--color-gold); text-decoration: none; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px;
+            transition: var(--transition-speed); cursor: pointer;
+            position: relative; overflow: hidden; z-index: 1;
+        }
+        .btn::before {
+            content: ''; position: absolute; top: 0; left: 0;
+            width: 0; height: 100%; background: var(--color-gold); z-index: -1; transition: var(--transition-speed);
+        }
+        .btn:hover::before { width: 100%; }
+        .btn:hover { color: var(--color-black); box-shadow: 0 0 20px rgba(212, 175, 55, 0.6); }
+
+        /* --- NAVIGATION --- */
+        header {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 20px 0; transition: var(--transition-speed);
+        }
+        header.scrolled {
+            background: rgba(5, 5, 5, 0.95); padding: 15px 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.5); backdrop-filter: blur(10px);
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo-container { display: flex; align-items: center; gap: 15px; cursor: pointer; }
+        .logo-img { height: 50px; width: auto; object-fit: contain; }
+        .logo-text { font-family: var(--font-heading); font-size: 1.2rem; font-weight: 700; color: var(--color-white); line-height: 1.2; }
+        .logo-text span { color: var(--color-gold); }
+
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-link { color: var(--color-white); text-decoration: none; font-weight: 500; position: relative; padding: 5px 0; transition: color 0.3s; cursor: pointer; }
+        .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--color-gold); transition: width 0.3s ease; }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        .nav-link.active { color: var(--color-gold); }
+        .hamburger { display: none; cursor: pointer; font-size: 1.5rem; color: var(--color-gold); }
+
+        /* --- PAGE STRUCTURE --- */
+        main { padding-top: 80px; min-height: 100vh; }
+        .page-section { display: none; animation: fadeIn 0.8s ease-out; padding: 40px 0; }
+        .page-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: calc(100vh - 80px); position: relative;
+            display: flex; align-items: center; justify-content: center; text-align: center;
+            overflow: hidden; margin-top: -80px; padding-top: 80px;
+        }
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://z-cdn-media.chatglm.cn/files/0c5b2282-88c7-4961-b8e7-aa484b738f12.jpg?auth_key=1871284901-3b4e610445a3432b92ebae7ab1f574d6-0-a995ce46a65195d64397a6c2b06a618a');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -2;
+            background-color: #000;
+        }
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.95)); 
+            z-index: -1;
+        }
+        .hero-content { perspective: 1000px; z-index: 2; max-width: 900px; padding: 20px; }
+        .hero-title {
+            font-family: var(--font-heading); font-size: 3.5rem; line-height: 1.2;
+            margin-bottom: 10px; text-shadow: 0 5px 15px rgba(0,0,0,0.8);
+            transform-style: preserve-3d; animation: floatText 6s ease-in-out infinite;
+        }
+        .hero-slogan {
+            font-family: var(--font-heading);
+            font-style: italic;
+            font-size: 1.5rem;
+            color: var(--color-gold-light);
+            margin-bottom: 20px;
+            font-weight: 400;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            animation: fadeUp 1s ease-out 0.3s forwards;
+            opacity: 0;
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-desc {
+            font-size: 1.1rem; color: var(--color-gray); margin-bottom: 30px; font-weight: 300;
+            backdrop-filter: blur(2px); background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px;
+            animation: fadeUp 1s ease-out 0.6s forwards;
+            opacity: 0;
+        }
+        @keyframes floatText { 0%, 100% { transform: translateY(0) translateZ(0); } 50% { transform: translateY(-10px) translateZ(20px); } }
+
+        /* --- SERVICES SECTION --- */
+        .services-section { padding: 80px 0 40px; text-align: center; background: rgba(18, 18, 18, 0.5); }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        .service-card {
+            background: var(--color-dark);
+            padding: 40px 20px;
+            border: 1px solid #333;
+            border-top: 3px solid var(--color-red); /* Aksen Merah di atas */
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--color-gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .service-card i {
+            font-size: 3rem;
+            color: var(--color-gold);
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+        .service-card:hover i { transform: scale(1.1); color: var(--color-white); }
+        .service-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--color-white);
+        }
+        .service-card p {
+            color: #aaa;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+        }
+        .service-link {
+            color: var(--color-red-bright);
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .service-link:hover {
+            color: var(--color-gold);
+            border-bottom-color: var(--color-gold);
+        }
+
+        /* --- PEMBINA SECTION --- */
+        .pembina-section { padding: 80px 0; text-align: center; }
+        .pembina-card {
+            background: var(--color-dark); padding: 40px;
+            border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 15px;
+            max-width: 600px; margin: 0 auto; position: relative; overflow: hidden;
+        }
+        .pembina-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px;
+            background: linear-gradient(90deg, var(--color-red), var(--color-gold), var(--color-red));
+        }
+        .pembina-img-wrapper {
+            width: 220px; height: 220px; margin: 0 auto 25px;
+            padding: 5px; border: 2px solid var(--color-gold); border-radius: 50%;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.3); position: relative;
+            background: #000;
+        }
+        .pembina-img {
+            width: 100%; height: 100%; object-fit: contain;
+            border-radius: 50%; border: 2px solid var(--color-black);
+        }
+        .pembina-name { font-family: var(--font-heading); font-size: 1.8rem; color: var(--color-gold); margin-bottom: 5px; }
+        .pembina-role { color: var(--color-white); font-size: 1rem; letter-spacing: 1px; }
+
+        /* --- GALLERY SECTION --- */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 20px 0; }
+        .gallery-card {
+            background: var(--color-dark); border-radius: 12px; padding: 30px; text-align: center;
+            border: 1px solid #333; transition: transform 0.1s ease, box-shadow 0.3s ease;
+            transform-style: preserve-3d; perspective: 1000px; cursor: pointer;
+        }
+        .gallery-icon { font-size: 3rem; color: var(--color-red); margin-bottom: 20px; transform: translateZ(30px); }
+        .gallery-title { font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 15px; transform: translateZ(20px); }
+        .gallery-btn { transform: translateZ(25px); margin-top: 10px; }
+
+        /* --- DIVISIONS SECTION --- */
+        .division-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .division-card-container {
+            background-color: transparent; width: 100%; height: 350px; perspective: 1000px;
+        }
+        .division-card-inner {
+            position: relative; width: 100%; height: 100%; text-align: center;
+            transition: transform 0.8s; transform-style: preserve-3d;
+            box-shadow: var(--box-shadow-gold); border-radius: 15px;
+        }
+        .division-card-container:hover .division-card-inner { transform: rotateY(180deg); }
+        .division-front, .division-back {
+            position: absolute; width: 100%; height: 100%;
+            -webkit-backface-visibility: hidden; backface-visibility: hidden;
+            border-radius: 15px; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; border: 1px solid var(--color-gold);
+        }
+        .division-front { background-color: var(--color-black); color: var(--color-white); }
+        .division-back {
+            background: linear-gradient(135deg, var(--color-red), #300000);
+            color: white; transform: rotateY(180deg); padding: 20px; border: 1px solid var(--color-red);
+        }
+        .div-icon { font-size: 4rem; color: var(--color-gold); margin-bottom: 20px; }
+        .div-title { font-family: var(--font-heading); font-size: 1.8rem; color: var(--color-white); }
+        .div-desc { font-size: 0.95rem; color: #eee; }
+
+        /* --- CONTACT SECTION --- */
+        .contact-container { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; text-align: center; }
+        .social-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px; width: 100%; max-width: 800px; margin-top: 40px;
+        }
+        .social-item {
+            background: var(--color-dark); padding: 20px; border-radius: 10px; border: 1px solid #333;
+            text-decoration: none; color: var(--color-white); transition: all 0.3s ease;
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+        }
+        .social-item i { font-size: 2rem; transition: color 0.3s; }
+        .social-item:hover { transform: translateY(-5px); border-color: var(--color-gold); box-shadow: 0 5px 20px rgba(212, 175, 55, 0.2); }
+        .social-item:hover i { color: var(--color-gold); }
+        .social-item.email:hover { border-color: var(--color-red); }
+        .social-item.email:hover i { color: var(--color-red); }
+
+        /* --- FOOTER --- */
+        footer { text-align: center; padding: 30px 0; background: var(--color-dark); border-top: 1px solid #222; margin-top: 50px; }
+        .footer-slogan {
+            font-family: var(--font-heading);
+            font-style: italic;
+            color: var(--color-gold);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        .copyright { font-size: 0.9rem; color: #666; }
+
+        /* --- ANIMATION CLASSES --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.2rem; } 
+            .hero-slogan { font-size: 1.2rem; } 
+            .section-title { font-size: 2rem; }
+            .nav-links {
+                position: absolute; top: 80px; right: 0; width: 100%; background: rgba(0,0,0,0.98);
+                flex-direction: column; padding: 20px; text-align: center; transform: translateY(-150%); transition: transform 0.4s ease;
+            }
+            .nav-links.nav-active { transform: translateY(0); } .hamburger { display: block; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Pattern -->
+    <div class="bg-pattern"></div>
+
+    <!-- Navigation -->
+    <header id="navbar">
+        <div class="container">
+            <nav>
+                <div class="logo-container" onclick="switchPage('home')">
+                    <img src="https://z-cdn-media.chatglm.cn/files/b58255b9-406b-4920-9487-86cd00025182.jpeg?auth_key=1871283621-ae4cfc9493874ca99a5c25467e116046-0-5af64fab1ce33cfeac147022a5ff4512" alt="Logo SSTB" class="logo-img">
+                    <div class="logo-text">
+                        SSTB<br><span>SMKN 3 BANTAENG</span>
+                    </div>
+                </div>
+                <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+                <ul class="nav-links" id="nav-links">
+                    <li><a class="nav-link active" onclick="switchPage('home')">Beranda</a></li>
+                    <li><a class="nav-link" onclick="switchPage('gallery')">Galeri</a></li>
+                    <li><a class="nav-link" onclick="switchPage('divisions')">Devisi</a></li>
+                    <li><a class="nav-link" onclick="switchPage('contact')">Hubungi Kami</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. HALAMAN BERANDA -->
+        <section id="home" class="page-section active">
+            <div class="hero">
+                <div class="hero-bg"></div>
+                <div class="hero-overlay"></div>
+                <div class="hero-content">
+                    <h1 class="hero-title text-gold">Sanggar Seni Tuma'buttayya Ri Bantayan</h1>
+                    
+                    <!-- SLOGAN -->
+                    <h2 class="hero-slogan">Tuma'buttayya sirikku pakabiasai riadaka</h2>
+                    
+                    <p class="hero-desc">
+                        Selamat datang di Sanggar Seni Tuma'buttayya Ri Bantayan yang sudah 12 tahun didirikan di SMKN 3 Bantaeng. Di dalamnya terdapat beberapa devisi, yaitu tari, teater, sastra, dan musik tradisi.
+                    </p>
+                    <a href="#" onclick="switchPage('gallery')" class="btn">Jelajahi Kegiatan</a>
+                </div>
+            </div>
+
+            <!-- LAYANAN KAMI -->
+            <div class="services-section reveal">
+                <div class="container">
+                    <h2 class="section-title">Layanan Kami</h2>
+                    <div class="services-grid">
+                        
+                        <!-- Service 1: Pakkio Bunting -->
+                        <div class="service-card">
+                            <i class="fas fa-hands-holding-circle"></i>
+                            <h3>Pakkio Bunting</h3>
+                            <p>Menyediakan jasa ritual adat Pakkio Bunting untuk penyambutan tamu kehormatan dengan prosesi sakral dan penuh kehangatan budaya Bugis.</p>
+                            <!-- TOMBOL LANGSUNG KE KONTAK -->
+                            <a href="#" onclick="switchPage('contact'); return false;" class="service-link">Booking Sekarang <i class="fas fa-arrow-right"></i></a>
+                        </div>
+
+                        <!-- Service 2: Tari Paduppa -->
+                        <div class="service-card">
+                            <i class="fas fa-fan"></i>
+                            <h3>Tari Paduppa</h3>
+                            <p>Penampilan Tari Paduppa yang memukau untuk memeriahkan berbagai acara spesial, pernikahan, dan acara resmi dengan sentuhan elegan.</p>
+                            <!-- TOMBOL LANGSUNG KE KONTAK -->
+                            <a href="#" onclick="switchPage('contact'); return false;" class="service-link">Booking Sekarang <i class="fas fa-arrow-right"></i></a>
+                        </div>
+
+                        <!-- Service 3: Mangaru -->
+                        <div class="service-card">
+                            <i class="fas fa-drum"></i>
+                            <h3>Mangaru</h3>
+                            <p>Pertunjukan seni Mangaru yang menghadirkan nuansa tradisional yang khas, menggugah semangat, dan memperkaya khazanah budaya Sulawesi.</p>
+                            <!-- TOMBOL LANGSUNG KE KONTAK -->
+                            <a href="#" onclick="switchPage('contact'); return false;" class="service-link">Booking Sekarang <i class="fas fa-arrow-right"></i></a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- PEMBINA SECTION -->
+            <div class="container pembina-section reveal">
+                <h2 class="section-title">Pembina Kami</h2>
+                <div class="pembina-card">
+                    <div class="pembina-img-wrapper">
+                        <img src="https://z-cdn-media.chatglm.cn/files/7ec67af2-03dd-4d4e-a873-84c09170f19c.jpg?auth_key=1871284515-3fd3ba6d591947b793d8533ec2d3c944-0-0a1e3d47929c07875f82696f3cd2e94e" alt="Andayani Alam, S.Pd" class="pembina-img">
+                    </div>
+                    <h3 class="pembina-name">Andayani Alam, S.Pd</h3>
+                    <p class="pembina-role text-red">Pembina Putri Sanggar Seni Tuma'buttayya Ri Bantayan (SSTB)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. HALAMAN GALERI -->
+        <section id="gallery" class="page-section">
+            <div class="container">
+                <h2 class="section-title reveal">Dokumentasi Kegiatan SSTB</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-card reveal tilt-effect">
+                        <i class="fas fa-images gallery-icon"></i>
+                        <h3 class="gallery-title">Arsip Kegiatan 1</h3>
+                        <p class="text-gray" style="margin-bottom: 20px;">Kumpulan dokumentasi aktivitas dan latihan sanggar.</p>
+                        <a href="https://drive.google.com/drive/folders/1OzBoV7asH1q0bw-CgCL22U02dOzj_HdZ?usp=drive_link" target="_blank" class="btn gallery-btn">Lihat Dokumentasi</a>
+                    </div>
+                    <div class="gallery-card reveal tilt-effect">
+                        <i class="fas fa-video gallery-icon"></i>
+                        <h3 class="gallery-title">Arsip Kegiatan 2</h3>
+                        <p class="text-gray" style="margin-bottom: 20px;">Rekam jejak penampilan dan pentas seni.</p>
+                        <a href="https://drive.google.com/drive/folders/1RqQvDLU2A6jfPP70lRzMfU8XIw9iApwo?usp=drive_link" target="_blank" class="btn gallery-btn">Lihat Dokumentasi</a>
+                    </div>
+                    <div class="gallery-card reveal tilt-effect">
+                        <i class="fas fa-photo-video gallery-icon"></i>
+                        <h3 class="gallery-title">Arsip Kegiatan 3</h3>
+                        <p class="text-gray" style="margin-bottom: 20px;">Momen kebersamaan dan persaudaraan SSTB.</p>
+                        <a href="https://drive.google.com/drive/folders/1c9_bI4nOlUHB9pcByZqV5QWtygBcwDzX?usp=drive_link" target="_blank" class="btn gallery-btn">Lihat Dokumentasi</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. HALAMAN DEVISI -->
+        <section id="divisions" class="page-section">
+            <div class="container">
+                <h2 class="section-title reveal">Devisi Seni</h2>
+                <div class="division-grid">
+                    <div class="division-card-container reveal">
+                        <div class="division-card-inner">
+                            <div class="division-front">
+                                <i class="fas fa-music div-icon"></i>
+                                <h3 class="div-title">Devisi Tari</h3>
+                            </div>
+                            <div class="division-back">
+                                <h3 class="div-title text-gold">Tari Tradisi</h3>
+                                <p class="div-desc">Melestarikan tarian khas Sulawesi Selatan dengan gerakan yang anggun dan penuh makna.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="division-card-container reveal">
+                        <div class="division-card-inner">
+                            <div class="division-front">
+                                <i class="fas fa-guitar div-icon"></i>
+                                <h3 class="div-title">Devisi Musik</h3>
+                            </div>
+                            <div class="division-back">
+                                <h3 class="div-title text-gold">Musik Tradisi</h3>
+                                <p class="div-desc">Menghadirkan harmoni alat musik daerah yang memukul dan menggugah hati.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="division-card-container reveal">
+                        <div class="division-card-inner">
+                            <div class="division-front">
+                                <i class="fas fa-theater-masks div-icon"></i>
+                                <h3 class="div-title">Devisi Teater</h3>
+                            </div>
+                            <div class="division-back">
+                                <h3 class="div-title text-gold">Seni Peran</h3>
+                                <p class="div-desc">Sajian cerita dramatik yang menyampaikan pesan budaya dan sosial melalui akting.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="division-card-container reveal">
+                        <div class="division-card-inner">
+                            <div class="division-front">
+                                <i class="fas fa-book-open div-icon"></i>
+                                <h3 class="div-title">Devisi Sastra</h3>
+                            </div>
+                            <div class="division-back">
+                                <h3 class="div-title text-gold">Sastra & Puisi</h3>
+                                <p class="div-desc">Menyalurkan ekspresi dan imajinasi melalui karya tulis yang indah dan bermakna.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. HALAMAN HUBUNGI KAMI -->
+        <section id="contact" class="page-section">
+            <div class="container contact-container reveal">
+                <h2 class="section-title">Hubungi Kami</h2>
+                <p style="color: #aaa; max-width: 600px;">Silakan hubungi kami melalui media sosial di bawah ini untuk booking layanan atau informasi lainnya.</p>
+                <div class="social-grid">
+                    <a href="https://instagram.com/bantayan.art" target="_blank" class="social-item"><i class="fab fa-instagram"></i><span>Instagram</span></a>
+                    <a href="https://tiktok.com/@bantayanart" target="_blank" class="social-item"><i class="fab fa-tiktok"></i><span>TikTok</span></a>
+                    <a href="https://youtube.com/@sstb7947" target="_blank" class="social-item"><i class="fab fa-youtube"></i><span>YouTube</span></a>
+                    <a href="https://facebook.com/Sanggar Seni Tuma'buttayya" target="_blank" class="social-item"><i class="fab fa-facebook-f"></i><span>Facebook</span></a>
+                    <a href="mailto:anakdesa608@gmail.com" class="social-item email"><i class="fas fa-envelope"></i><span>Email</span></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p class="footer-slogan">"Tuma'buttayya sirikku pakabiasai riadaka"</p>
+            <p class="copyright">&copy; 2024 Sanggar Seni Tuma'buttayya Ri Bantayan (SSTB). All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            window.switchPage = (pageId) => {
+                // Hide all sections
+                document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
+                
+                // Show target section
+                document.getElementById(pageId).classList.add('active');
+                
+                // Update Active Nav Link
+                document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+                const activeLink = Array.from(document.querySelectorAll('.nav-link')).find(link => link.getAttribute('onclick').includes(pageId));
+                if(activeLink) activeLink.classList.add('active');
+
+                // Smooth Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                // Close mobile menu if open
+                if(document.getElementById('nav-links').classList.contains('nav-active')) {
+                    document.getElementById('nav-links').classList.remove('nav-active');
+                }
+            };
+            document.getElementById('hamburger').addEventListener('click', () => {
+                document.getElementById('nav-links').classList.toggle('nav-active');
+            });
+            window.addEventListener('scroll', () => {
+                const navbar = document.getElementById('navbar');
+                if (window.scrollY > 50) navbar.classList.add('scrolled');
+                else navbar.classList.remove('scrolled');
+            });
+            const revealOnScroll = () => {
+                document.querySelectorAll('.reveal').forEach(el => {
+                    if (el.getBoundingClientRect().top < window.innerHeight - 150) el.classList.add('active');
+                });
+            };
+            window.addEventListener('scroll', revealOnScroll);
+            revealOnScroll();
+            document.querySelectorAll('.tilt-effect').forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = (e.clientX - rect.left) / rect.width;
+                    const y = (e.clientY - rect.top) / rect.height;
+                    card.style.transform = `perspective(1000px) rotateX(${(0.5 - y) * 20}deg) rotateY(${(x - 0.5) * 20}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
